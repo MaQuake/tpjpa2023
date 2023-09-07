@@ -1,11 +1,10 @@
 package jpa;
 
 
-import domain.Employee;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
+
+import java.util.List;
 
 public class JpaTest {
 
@@ -19,25 +18,30 @@ public class JpaTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		EntityManagerFactory factory = Persistence
-				.createEntityManagerFactory("dev");
-		EntityManager manager = factory.createEntityManager();
-
+		EntityManager manager = EntityManagerHelper.getEntityManager();
+		JpaTest test = new JpaTest(manager);
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
 		try {
-
-			manager.persist(new Employee("Eddy"));
-			manager.persist(new Employee("Baptist"));
-
+			test.createEmployees();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		tx.commit();
-
+		test.listEmployees();
 		manager.close();
-		factory.close();
+		EntityManagerHelper.closeEntityManagerFactory();
+		System.out.println(".. done");
 	}
+
+
+	private void createEmployees() {
+
+	}
+	private void listEmployees() {
+
+	}
+
 
 
 
