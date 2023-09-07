@@ -13,7 +13,7 @@ public class Appointment {
     private int duration;
     private String name;
 
-    private User patient;
+    private Patient patient;
     private Professional pro;
 
     public Appointment() {
@@ -41,7 +41,7 @@ public class Appointment {
         this.duration = duration;
     }
 
-    public void setPatient(User patient) {
+    public void setPatient(Patient patient) {
         this.patient = patient;
     }
 
@@ -50,7 +50,7 @@ public class Appointment {
     }
 
     @ManyToOne
-    public User getPatient() {
+    public Patient getPatient() {
         return patient;
     }
 
