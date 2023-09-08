@@ -1,4 +1,4 @@
-# Projet pour le TP JPA 2021 UniR
+# Projet pour TAA checkpoint TP1
 
 ```mermaid
     classDiagram
