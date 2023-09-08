@@ -26,6 +26,7 @@ public class Professional extends User{
         this.profession = profession;
     }
 
+
     public String getProfession() {
         return profession;
     }
@@ -41,5 +42,10 @@ public class Professional extends User{
 
     public void setAppointmentList(Set<Appointment> appointmentList) {
         this.appointmentList = appointmentList;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + this.firstname + ", " + this.lastName + ", " + this.mail + ", " + this.profession +"]";
     }
 }

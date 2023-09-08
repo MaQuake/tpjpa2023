@@ -78,4 +78,9 @@ public class Appointment {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Rdv at " + this.appointmentDate.toString() + " with "+ patient.firstname + " and " + pro.firstname;
+    }
 }
