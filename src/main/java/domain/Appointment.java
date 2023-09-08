@@ -16,7 +16,14 @@ public class Appointment {
     private Patient patient;
     private Professional pro;
 
-    public Appointment() {
+    public Appointment() {}
+
+    public Appointment(Date appointmentDate, int duration, String name, Patient patient, Professional pro) {
+        this.appointmentDate = appointmentDate;
+        this.duration = duration;
+        this.name = name;
+        this.patient = patient;
+        this.pro = pro;
     }
 
     @Id

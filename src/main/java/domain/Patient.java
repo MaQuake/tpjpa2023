@@ -6,6 +6,7 @@ import jakarta.persistence.OneToMany;
 import org.hsqldb.lib.List;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 @Entity
 public class Patient extends User {
@@ -21,14 +22,12 @@ public class Patient extends User {
     }
 
 
-
-
-    /*@OneToMany(mappedBy = "patient", cascade = CascadeType.PERSIST)
-    public List<Appointment> getAppointmentList() {
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.PERSIST)
+    public Set<Appointment> getAppointmentList() {
         return appointmentList;
     }
 
-    public void setAppointmentList(List<Appointment> appointmentList) {
+    public void setAppointmentList(Set<Appointment> appointmentList) {
         this.appointmentList = appointmentList;
-    }*/
+    }
 }

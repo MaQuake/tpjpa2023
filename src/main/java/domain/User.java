@@ -3,6 +3,8 @@ package domain;
 import jakarta.persistence.*;
 import org.hsqldb.lib.List;
 
+import java.util.Set;
+
 @Entity
 public abstract class User {
 
@@ -12,8 +14,7 @@ public abstract class User {
     protected String firstname;
     protected String lastName;
 
-
-    //protected List<Appointment> appointmentList;
+    protected Set<Appointment> appointmentList;
 
     @Id
     @GeneratedValue

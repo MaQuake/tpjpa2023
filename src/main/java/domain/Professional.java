@@ -4,16 +4,27 @@ import jakarta.persistence.*;
 import org.hsqldb.lib.List;
 
 import java.util.ArrayList;
+import java.util.Set;
+
 @Entity
 public class Professional extends User{
 
     private String profession;
-    //List<Appointment> appointmentList = (List<Appointment>) new ArrayList<Appointment>();
 
     public Professional() {
-
+        this.profession = "unknow";
+    }
+    public Professional(String profession) {
+        this.profession = profession;
     }
 
+    public Professional(String mail, String password, String firstname, String lastName,String profession) {
+        this.mail = mail;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastName = lastName;
+        this.profession = profession;
+    }
 
     public String getProfession() {
         return profession;
@@ -23,12 +34,12 @@ public class Professional extends User{
         this.profession = profession;
     }
 
-    /*@OneToMany(targetEntity= Professional.class, mappedBy = "pro", cascade = CascadeType.PERSIST)
-    public List<Appointment> getAppointmentList() {
+    @OneToMany(mappedBy = "pro", cascade = CascadeType.PERSIST)
+    public Set<Appointment> getAppointmentList() {
         return appointmentList;
     }
 
-    public void setAppointmentList(List<Appointment> appointmentList) {
+    public void setAppointmentList(Set<Appointment> appointmentList) {
         this.appointmentList = appointmentList;
-    }*/
+    }
 }
