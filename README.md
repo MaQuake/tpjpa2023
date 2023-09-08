@@ -3,7 +3,9 @@
 ```mermaid
     classDiagram
     User <|-- Professional
-    User "2"--  "*"Appointment
+    User <|-- Patient
+    Patient "1" --  "*"Appointment
+    Professional "1" --  "*"Appointment
 ```
 
 
