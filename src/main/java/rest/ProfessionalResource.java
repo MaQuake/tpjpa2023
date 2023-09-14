@@ -18,7 +18,7 @@ public class ProfessionalResource {
     @GET
     @Path("/{professionalId}")
     public Professional getPatientById(@PathParam("professionalId") Long professionalId)  {
-        // return pet
+        // return professional
         return (Professional) pa.findOne(professionalId);
     }
 
