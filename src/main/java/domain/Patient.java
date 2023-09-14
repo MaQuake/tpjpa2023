@@ -1,14 +1,17 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import org.hsqldb.lib.List;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 
-import java.util.ArrayList;
-import java.util.Set;
+import java.util.List;
+
 
 @Entity
+@XmlRootElement(name = "Patient")
 public class Patient extends User {
 
     public Patient(String mail, String password, String firstname, String lastName) {
@@ -23,11 +26,11 @@ public class Patient extends User {
 
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.PERSIST)
-    public Set<Appointment> getAppointmentList() {
-        return appointmentList;
+    public List<Appointment> getAppointmentList() {
+        return  appointmentList;
     }
 
-    public void setAppointmentList(Set<Appointment> appointmentList) {
+    public void setAppointmentList(List<Appointment> appointmentList) {
         this.appointmentList = appointmentList;
     }
 

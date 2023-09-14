@@ -1,10 +1,17 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
+
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Appointment {
+@XmlRootElement(name = "Appointment")
+public class Appointment implements Serializable {
     long id;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -28,6 +35,7 @@ public class Appointment {
 
     @Id
     @GeneratedValue
+    @XmlElement(name = "id")
     public long getId() {
         return id;
     }
@@ -36,6 +44,7 @@ public class Appointment {
         this.id = id;
     }
 
+    @XmlElement(name = "date")
     public Date getAppointmentDate(){
         return this.appointmentDate;
     }
@@ -57,19 +66,26 @@ public class Appointment {
     }
 
     @ManyToOne
+    @XmlTransient
+    @JsonIgnore
     public Patient getPatient() {
         return patient;
     }
 
     @ManyToOne
+    @XmlTransient
+    @JsonIgnore
     public Professional getPro() {
         return pro;
     }
+
+    @XmlElement(name = "durée")
 
     public int getDuration() {
         return duration;
     }
 
+    @XmlElement(name = "name")
     public String getName() {
         return name;
     }

@@ -1,12 +1,14 @@
 package domain;
 
 import jakarta.persistence.*;
-import org.hsqldb.lib.List;
+import jakarta.xml.bind.annotation.XmlElement;
 
-import java.util.Set;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public abstract class User {
+public abstract class User implements Serializable {
 
     private long id;
     protected   String mail;
@@ -14,14 +16,16 @@ public abstract class User {
     protected String firstname;
     protected String lastName;
 
-    protected Set<Appointment> appointmentList;
+    protected List<Appointment> appointmentList =  new ArrayList<Appointment>();;
 
     @Id
     @GeneratedValue
+    @XmlElement(name = "id")
     public long getId() {
         return id;
     }
 
+    @XmlElement(name = "mail")
     public String getMail() {
         return mail;
     }
@@ -30,10 +34,12 @@ public abstract class User {
         return password;
     }
 
+    @XmlElement(name = "firstname")
     public String getFirstname() {
         return firstname;
     }
 
+    @XmlElement(name = "lastname")
     public String getLastName() {
         return lastName;
     }

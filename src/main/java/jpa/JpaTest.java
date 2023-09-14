@@ -31,14 +31,13 @@ public class JpaTest {
 		tx.begin();
 		try {
 			test.fillBdd();
-			PatientDAO pa= new PatientDAO();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		tx.commit();
-		test.getProfessionals();
+		/*test.getProfessionals();
 		test.getPatients();
-		test.getAppointment();
+		test.getAppointment();*/
 		manager.close();
 		EntityManagerHelper.closeEntityManagerFactory();
 		System.out.println(".. done");

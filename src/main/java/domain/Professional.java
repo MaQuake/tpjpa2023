@@ -1,12 +1,16 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import org.hsqldb.lib.List;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 
-import java.util.ArrayList;
-import java.util.Set;
+import java.util.List;
+
 
 @Entity
+@XmlRootElement(name = "Profesional")
 public class Professional extends User{
 
     private String profession;
@@ -26,7 +30,7 @@ public class Professional extends User{
         this.profession = profession;
     }
 
-
+    @XmlElement(name = "profession")
     public String getProfession() {
         return profession;
     }
@@ -36,11 +40,11 @@ public class Professional extends User{
     }
 
     @OneToMany(mappedBy = "pro", cascade = CascadeType.PERSIST)
-    public Set<Appointment> getAppointmentList() {
+    public List<Appointment> getAppointmentList() {
         return appointmentList;
     }
 
-    public void setAppointmentList(Set<Appointment> appointmentList) {
+    public void setAppointmentList(List<Appointment> appointmentList) {
         this.appointmentList = appointmentList;
     }
 
