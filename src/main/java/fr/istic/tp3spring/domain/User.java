@@ -1,6 +1,7 @@
 package fr.istic.tp3spring.domain;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.util.List;
 @Entity
 public abstract class User implements Serializable {
 
+    @Column(unique=true)
     protected String mail;
     protected String password;
     protected String firstname;
