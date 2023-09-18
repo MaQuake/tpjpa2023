@@ -1,6 +1,5 @@
-package fr.istic.tp3spring.service;
+package fr.istic.tp3spring.dao;
 
-import fr.istic.tp3spring.domain.Appointment;
 import fr.istic.tp3spring.domain.Professional;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,21 +13,21 @@ public interface ProfessionalDAO extends JpaRepository<Professional, Long> {
      * @param mail
      * @return
      */
-    public Professional findByMail(String mail);
+    public Professional getByMail(String mail);
 
     /**
      * find professional by profession
      * @param profession
      * @return
      */
-    public List<Professional> findByProfession(String profession);
+    public List<Professional> getByProfession(String profession);
 
     /**
      * Save a new professional
      * @param professional
      * @return
      */
-    public Professional saveProfessional(Professional professional);
+    //public Professional saveProfessional(Professional professional);
 
     /**
      * update a professional
@@ -36,7 +35,7 @@ public interface ProfessionalDAO extends JpaRepository<Professional, Long> {
      * @param professionalId
      * @return
      */
-    public Professional updateProfessionalById(Professional professional, Long professionalId);
+    //public Professional updateProfessionalById(Professional professional, Long professionalId);
 
 
 

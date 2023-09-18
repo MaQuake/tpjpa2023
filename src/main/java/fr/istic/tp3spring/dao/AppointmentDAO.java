@@ -1,10 +1,12 @@
-package fr.istic.tp3spring.service;
+package fr.istic.tp3spring.dao;
 
 import fr.istic.tp3spring.domain.Appointment;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
+@Transactional
 public interface AppointmentDAO extends JpaRepository<Appointment, Long> {
 
     /**
@@ -12,21 +14,15 @@ public interface AppointmentDAO extends JpaRepository<Appointment, Long> {
      * @param id
      * @return
      */
-    public Appointment findById(String id);
+    public Appointment getById(Long id);
 
-    /**
-     * Save a list of appointment
-     * @param appointmentList
-     * @return
-     */
-    public List<Appointment> saveAll(List<Appointment> appointmentList);
 
     /**
      * Save an appointment
      * @param appointment
      * @return
      */
-    public Appointment saveAppointment(Appointment appointment);
+    //public Appointment saveAppointment(Appointment appointment);
 
     /**
      * Update an appointment
@@ -34,12 +30,12 @@ public interface AppointmentDAO extends JpaRepository<Appointment, Long> {
      * @param appointmentId
      * @return
      */
-    public Appointment updateAppointment(Appointment appointment, Long appointmentId);
+    //public Appointment updateAppointment(Appointment appointment, Long appointmentId);
 
     /**
      * delete aan appointment by Id
      * @param AppointmentId
      */
-    public void deleteAppointmentById(long appointmentId);
+    //public void deleteAppointmentById(long appointmentId);
 
 }

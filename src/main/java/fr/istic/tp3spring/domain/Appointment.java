@@ -2,6 +2,7 @@ package fr.istic.tp3spring.domain;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
@@ -54,11 +55,13 @@ public class Appointment implements Serializable {
     }
 
     @ManyToOne
+    @JsonIgnore
     public Patient getPatient() {
         return patient;
     }
 
     @ManyToOne
+    @JsonIgnore
     public Professional getPro() {
         return pro;
     }
