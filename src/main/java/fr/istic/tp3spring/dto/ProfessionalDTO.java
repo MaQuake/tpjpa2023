@@ -2,30 +2,63 @@ package fr.istic.tp3spring.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.istic.tp3spring.domain.Appointment;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
-@Getter
-@Setter
+
+
 public class ProfessionalDTO {
 
-    @JsonProperty("id")
-    private int id;
+    private long id;
 
-    @JsonProperty("profession")
     private String profession;
 
-    @JsonProperty("mail")
     private String mail;
 
-    @JsonProperty("firstname")
     private String firstname;
 
-    @JsonProperty("lastname")
     private String lastname;
 
-    @JsonProperty("appointmentList")
-    private List<Appointment> appointmentList;
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+/*@JsonProperty("appointmentList")
+    private List<Appointment> appointmentList;*/
 }

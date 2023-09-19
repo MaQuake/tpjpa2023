@@ -3,6 +3,7 @@ package fr.istic.tp3spring.domain;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import lombok.Builder;
 
 import java.util.List;
 
