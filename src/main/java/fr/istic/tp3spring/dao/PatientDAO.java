@@ -16,26 +16,7 @@ public interface PatientDAO extends JpaRepository<Patient, Long> {
      */
     public Patient getByMail(String mail);
 
-    /**
-     * create a new patient
-     * @param patient
-     * @return
-     */
-    //public Patient savePatient(Patient patient);
 
-    /**
-     * update Patient
-     * @param patient
-     * @param patientId
-     * @return
-     */
-   // public Patient updatePatientById(Patient patient, Long patientId);
-
-    /**
-     * delete a patient By Id
-     * @param patientId
-     */
-    //public void deletePatientById(long patientId);
 
 
 }

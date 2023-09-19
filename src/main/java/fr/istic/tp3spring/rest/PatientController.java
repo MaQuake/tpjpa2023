@@ -16,7 +16,6 @@ import java.util.List;
 public class PatientController {
 
     private final PatientDAO patientDAO;
-    private final MapStructMapper mapper = new MapStructMapperImpl();
 
     public PatientController(PatientDAO patientService){
         this.patientDAO = patientService;

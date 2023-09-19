@@ -22,20 +22,6 @@ public interface ProfessionalDAO extends JpaRepository<Professional, Long> {
      */
     public List<Professional> getByProfession(String profession);
 
-    /**
-     * Save a new professional
-     * @param professional
-     * @return
-     */
-    //public Professional saveProfessional(Professional professional);
-
-    /**
-     * update a professional
-     * @param professional
-     * @param professionalId
-     * @return
-     */
-    //public Professional updateProfessionalById(Professional professional, Long professionalId);
 
 
 

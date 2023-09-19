@@ -16,26 +16,17 @@ public interface AppointmentDAO extends JpaRepository<Appointment, Long> {
      */
     public Appointment getById(Long id);
 
-
     /**
-     * Save an appointment
-     * @param appointment
+     * Find all appointment linked to a pro
+     * @param id
      * @return
      */
-    //public Appointment saveAppointment(Appointment appointment);
+    public List<Appointment> getByProId(Long id);
 
     /**
-     * Update an appointment
-     * @param appointment
-     * @param appointmentId
+     * Find all patient linked to a patient
+     * @param id
      * @return
      */
-    //public Appointment updateAppointment(Appointment appointment, Long appointmentId);
-
-    /**
-     * delete aan appointment by Id
-     * @param AppointmentId
-     */
-    //public void deleteAppointmentById(long appointmentId);
-
+    public List<Appointment> getByPatientId(Long id);
 }
