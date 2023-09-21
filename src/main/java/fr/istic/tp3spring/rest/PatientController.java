@@ -5,11 +5,14 @@ import fr.istic.tp3spring.dao.PatientDAO;
 import fr.istic.tp3spring.dto.PatientDTO;
 import fr.istic.tp3spring.dto.mapper.MapStructMapper;
 import fr.istic.tp3spring.dto.mapper.MapStructMapperImpl;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("patient")
@@ -29,7 +32,7 @@ public class PatientController {
             Patient p = this.patientDAO.getById(id);
             pDTO = MapStructMapper.INSTANCE.patientToPatientDTO(p);
         }catch (Exception ex) {
-            System.out.println(ex);
+            Logger.getGlobal().warning(ex.toString());
         }
         return pDTO;
     }
@@ -44,7 +47,7 @@ public class PatientController {
             pDTO = MapStructMapper.INSTANCE.patientToPatientDTO(p);
         }
         catch (Exception ex) {
-            System.out.println(ex);
+            Logger.getGlobal().warning(ex.toString());
         }
         return pDTO;
     }
@@ -59,23 +62,45 @@ public class PatientController {
             }
             return pDTO;
         } catch (Exception ex) {
-            System.out.println(ex);
+            Logger.getGlobal().warning(ex.toString());
             return null;
         }
     }
 
+    /**
+     * Create a patient DTO convert it to Patient and save it
+     * @param patientDTO
+     * @return
+     */
     @PostMapping("create")
-    public Patient createPatient(@RequestBody Patient patient){
-        patientDAO.save(patient);
-        return patient;
+    public ResponseEntity<PatientDTO> createPatient(@RequestBody PatientDTO patientDTO){
+        try {
+            if(patientDAO.getByMail(patientDTO.getMail()) == null){
+                Patient patient = MapStructMapper.INSTANCE.patientDTOToPatient(patientDTO);
+                patientDAO.saveAndFlush(patient);
+                return new ResponseEntity<>(patientDTO,HttpStatus.CREATED);
+            }else{
+                return new ResponseEntity<>(patientDTO,HttpStatus.FOUND);
+            }
+
+        }catch (Exception e){
+            Logger.getGlobal().warning(e.toString());
+            return new ResponseEntity<>(patientDTO,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/delete/{id}")
     public String deletePatientById(@PathVariable("id") long id){
         try{
-            patientDAO.deleteById(id);
-            return "Patient deleted";
+            if(patientDAO.getById(id) != null){
+                patientDAO.deleteById(id);
+                return "Patient deleted";
+            }else{
+                return "Patient do not exist";
+            }
+
         }catch(Exception e){
+            Logger.getGlobal().warning(e.toString());
             return "Error with patient deletion";
         }
 

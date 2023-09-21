@@ -8,6 +8,8 @@ import java.util.List;
 
 @Transactional
 public interface ProfessionalDAO extends JpaRepository<Professional, Long> {
+
+    public Professional getById(Long id);
     /**
      * Find a professional by mail
      * @param mail

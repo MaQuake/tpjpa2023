@@ -19,11 +19,11 @@ public class Professional extends User{
         this.profession = profession;
     }
 
-    public Professional(String mail, String password, String firstname, String lastName,String profession) {
+    public Professional(String mail, String password, String firstname, String lastname,String profession) {
         this.mail = mail;
         this.password = password;
         this.firstname = firstname;
-        this.lastName = lastName;
+        this.lastname = lastname;
         this.profession = profession;
     }
 
@@ -46,6 +46,6 @@ public class Professional extends User{
 
     @Override
     public String toString() {
-        return "[" + this.firstname + ", " + this.lastName + ", " + this.mail + ", " + this.profession +"]";
+        return "[" + this.firstname + ", " + this.lastname + ", " + this.mail + ", " + this.profession +"]";
     }
 }

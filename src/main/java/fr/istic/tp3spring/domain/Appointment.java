@@ -16,7 +16,6 @@ import java.util.Date;
 public class Appointment implements Serializable {
 
     private Date appointmentDate;
-
     private int duration;
     private String name;
 

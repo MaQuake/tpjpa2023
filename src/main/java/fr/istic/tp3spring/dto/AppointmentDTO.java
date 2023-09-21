@@ -2,11 +2,13 @@ package fr.istic.tp3spring.dto;
 
 import fr.istic.tp3spring.domain.Patient;
 import fr.istic.tp3spring.domain.Professional;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 public class AppointmentDTO {
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date appointmentDate;
     private int duration;
     private String name;

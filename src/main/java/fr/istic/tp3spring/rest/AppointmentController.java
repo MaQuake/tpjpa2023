@@ -1,19 +1,17 @@
 package fr.istic.tp3spring.rest;
 
 import fr.istic.tp3spring.dao.AppointmentDAO;
-import fr.istic.tp3spring.dao.PatientDAO;
 import fr.istic.tp3spring.domain.Appointment;
-import fr.istic.tp3spring.domain.Patient;
 import fr.istic.tp3spring.dto.AppointmentDTO;
-import fr.istic.tp3spring.dto.PatientDTO;
 import fr.istic.tp3spring.dto.mapper.MapStructMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("appointment")
@@ -35,7 +33,7 @@ public class AppointmentController {
             }
             return pDTO;
         } catch (Exception ex) {
-            System.out.println(ex);
+            Logger.getGlobal().warning(ex.toString());
             return null;
         }
     }
@@ -50,7 +48,7 @@ public class AppointmentController {
             }
             return pDTO;
         } catch (Exception ex) {
-            System.out.println(ex);
+            Logger.getGlobal().warning(ex.toString());
             return null;
         }
     }
@@ -65,8 +63,20 @@ public class AppointmentController {
             }
             return pDTO;
         } catch (Exception ex) {
-            System.out.println(ex);
+            Logger.getGlobal().warning(ex.toString());
             return null;
+        }
+    }
+
+    @PostMapping("create")
+    public ResponseEntity<AppointmentDTO> createAppointment(@RequestBody AppointmentDTO appointmentDTO){
+        try{
+            Appointment app = MapStructMapper.INSTANCE.appointmentDTOToAppointment(appointmentDTO);
+            appointmentDAO.saveAndFlush(app);
+            return new ResponseEntity<>(appointmentDTO, HttpStatus.CREATED);
+        }catch(Exception ex){
+            Logger.getGlobal().warning(ex.toString());
+            return new ResponseEntity<>(appointmentDTO,HttpStatus.BAD_REQUEST);
         }
     }
 

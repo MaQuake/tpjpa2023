@@ -15,6 +15,9 @@ public class PatientDTO {
 
     private String firstname;
 
+    private String lastname;
+
+
     public long getId() {
         return id;
     }
@@ -47,7 +50,6 @@ public class PatientDTO {
         this.lastname = lastname;
     }
 
-    private String lastname;
 
     /*@JsonProperty("appointmentList")
     private List<Appointment> appointmentList;*/

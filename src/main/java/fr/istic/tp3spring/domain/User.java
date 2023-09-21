@@ -1,9 +1,8 @@
 package fr.istic.tp3spring.domain;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,16 +10,18 @@ import java.util.List;
 @Entity
 public abstract class User implements Serializable {
 
-    @Column(unique=true)
+
     protected String mail;
     protected String password;
     protected String firstname;
-    protected String lastName;
+    protected String lastname;
 
     protected List<Appointment> appointmentList =  new ArrayList<Appointment>();;
+
+
     private Long id;
 
-
+    @Column(unique=true)
     public String getMail() {
         return mail;
     }
@@ -33,8 +34,8 @@ public abstract class User implements Serializable {
         return firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
     public void setMail(String mail) {
@@ -49,8 +50,8 @@ public abstract class User implements Serializable {
         this.firstname = firstname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
 
@@ -59,6 +60,9 @@ public abstract class User implements Serializable {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Basic(optional = false)
+    @Column(name = "id",unique=true, nullable = false)
     public Long getId() {
         return id;
     }

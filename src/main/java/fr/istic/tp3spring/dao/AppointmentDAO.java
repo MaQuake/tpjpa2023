@@ -2,6 +2,7 @@ package fr.istic.tp3spring.dao;
 
 import fr.istic.tp3spring.domain.Appointment;
 import jakarta.transaction.Transactional;
+import org.mapstruct.Named;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public interface AppointmentDAO extends JpaRepository<Appointment, Long> {
      * @param id
      * @return
      */
+
     public Appointment getById(Long id);
 
     /**
