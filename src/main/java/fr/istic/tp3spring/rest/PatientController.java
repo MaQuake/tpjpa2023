@@ -7,7 +7,6 @@ import fr.istic.tp3spring.dto.mapper.MapStructMapper;
 import fr.istic.tp3spring.dto.mapper.MapStructMapperImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
