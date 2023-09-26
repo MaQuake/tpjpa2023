@@ -31,7 +31,7 @@ version finale du tp (jaxRS,jpa et JPA,Spring)
 # Mon avancement
 
 Mon modèle métier est similaire entre le projet jpa/jaxRS et Spring. Je pense avoir utilisé au moins une 
-fois tous les aspects et technologies évouqués pour les tp sur JaxRS ou sur springboot.
+fois tous les aspects et technologies évouqués pour les tp sur JaxRS ou sur springboot. 
 
 ## Modèle métier
 Vous trouverez ci-dessous un digramme de classe pour décrire le modèle métier.
