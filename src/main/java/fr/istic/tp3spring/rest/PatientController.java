@@ -4,6 +4,11 @@ import fr.istic.tp3spring.domain.Patient;
 import fr.istic.tp3spring.dao.PatientDAO;
 import fr.istic.tp3spring.dto.PatientDTO;
 import fr.istic.tp3spring.dto.mapper.MapStructMapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +32,16 @@ public class PatientController {
      * @param id
      * @return
      */
-    @RequestMapping("get-by-id/{id}")
+    @Operation(summary = "Get a Patient By ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found the book",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = PatientDTO.class)) }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Patient not found",
+                    content = @Content) })
+    @GetMapping("get-by-id/{id}")
     @ResponseBody
     public PatientDTO getById(@PathVariable("id")Long id){
         PatientDTO pDTO = null;

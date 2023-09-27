@@ -31,7 +31,7 @@ version finale du tp (jaxRS,jpa et JPA,Spring)
 # Mon avancement
 
 Mon modèle métier est similaire entre le projet jpa/jaxRS et Spring. Je pense avoir utilisé au moins une 
-fois tous les aspects et technologies évouqués pour les tp sur JaxRS ou sur springboot. 
+fois tous les aspects et technologies évoqués pour les tp sur JaxRS ou sur springboot. 
 
 ## Modèle métier
 Vous trouverez ci-dessous un digramme de classe pour décrire le modèle métier.
@@ -109,7 +109,11 @@ exécuté sur notre API.
 
 ### OpenAPI
 
-TODO Rien est mis en place pour le moment
+Il y a un endpoint openAPI disponible avec un swagger :
+
+OpenAPI : http://localhost:8080/v3/api-docs
+
+Swagger : http://localhost:8080/swagger-ui/index.html#/
 
 ### Authentification
 
