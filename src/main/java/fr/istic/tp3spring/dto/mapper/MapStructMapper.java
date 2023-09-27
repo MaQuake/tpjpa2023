@@ -12,10 +12,14 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@Mapper(componentModel = "spring", uses = { PatientMapper.class, ProfessionnalMapper.class })
+import java.util.Optional;
+
+@Mapper(componentModel = "spring")
 public interface MapStructMapper {
     MapStructMapper INSTANCE = Mappers.getMapper( MapStructMapper.class );
+
 
     PatientDTO patientToPatientDTO(Patient patient);
 
@@ -25,8 +29,6 @@ public interface MapStructMapper {
     @Mapping(source="appointment.patient.id",target = "patientId")
     AppointmentDTO appointmentToAppointmentDTO(Appointment appointment);
 
-    @Mapping(source = "patientId", target = "patient", qualifiedByName = "mapPatient")
-    @Mapping(source = "proId", target = "pro", qualifiedByName = "mapPro")
     Appointment appointmentDTOToAppointment(AppointmentDTO appointmentDTO);
 
     Patient patientDTOToPatient(PatientDTO patientDTO);

@@ -4,7 +4,6 @@ import fr.istic.tp3spring.domain.Patient;
 import fr.istic.tp3spring.dao.PatientDAO;
 import fr.istic.tp3spring.dto.PatientDTO;
 import fr.istic.tp3spring.dto.mapper.MapStructMapper;
-import fr.istic.tp3spring.dto.mapper.MapStructMapperImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
