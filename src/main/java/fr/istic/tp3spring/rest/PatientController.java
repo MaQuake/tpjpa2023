@@ -22,6 +22,11 @@ public class PatientController {
         this.patientDAO = patientService;
     }
 
+    /**
+     * get a Patient by ID
+     * @param id
+     * @return
+     */
     @RequestMapping("get-by-id/{id}")
     @ResponseBody
     public PatientDTO getById(@PathVariable("id")Long id){
@@ -36,6 +41,11 @@ public class PatientController {
     }
 
 
+    /**
+     * get a Patient by mail
+     * @param mail
+     * @return
+     */
     @RequestMapping("get-by-email/{email}")
     @ResponseBody
     public PatientDTO getByEmail(@PathVariable("email") String mail) {
@@ -50,6 +60,10 @@ public class PatientController {
         return pDTO;
     }
 
+    /**
+     * get all patient
+     * @return
+     */
     @RequestMapping("get-all-patient")
     @ResponseBody
     public List<PatientDTO> getAllPatient(){
@@ -87,6 +101,11 @@ public class PatientController {
         }
     }
 
+    /**
+     * Delete a patient by ID
+     * @param id
+     * @return
+     */
     @DeleteMapping("/delete/{id}")
     public String deletePatientById(@PathVariable("id") long id){
         try{
@@ -101,6 +120,31 @@ public class PatientController {
             Logger.getGlobal().warning(e.toString());
             return "Error with patient deletion";
         }
+    }
+
+    /**
+     * Update a Patinet by his Id
+     * @param id
+     * @param patientDTO
+     * @return
+     */
+    @RequestMapping("update/{id}")
+    public ResponseEntity<String> updatePatient(@PathVariable("id")long id,@RequestBody PatientDTO patientDTO){
+        try{
+            if(patientDTO == null){
+                return new ResponseEntity<>("Patient deleted",HttpStatus.NO_CONTENT);
+            }
+
+            Patient patientToUpdate = MapStructMapper.INSTANCE.patientDTOToPatient(patientDTO);
+            patientToUpdate.setId(id);
+            patientDAO.save(patientToUpdate);
+
+            return new ResponseEntity<>("Patient deleted",HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Patient deleted",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
     }
+
+
 }

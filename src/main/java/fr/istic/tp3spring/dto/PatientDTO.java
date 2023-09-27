@@ -51,7 +51,4 @@ public class PatientDTO {
     }
 
 
-    /*@JsonProperty("appointmentList")
-    private List<Appointment> appointmentList;*/
-
 }

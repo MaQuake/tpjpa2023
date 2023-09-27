@@ -90,6 +90,11 @@ public class AppointmentController {
         }
     }
 
+    /**
+     * Create an appointment
+     * @param appointmentDTO
+     * @return
+     */
     @PostMapping("create")
     public ResponseEntity<AppointmentDTO> createAppointment(@RequestBody AppointmentDTO appointmentDTO){
         try{
@@ -104,14 +109,30 @@ public class AppointmentController {
             concernedPatient.getAppointmentList().add(app);
 
             appointmentDAO.saveAndFlush(app);
-            professionalDAO.save(concernedPro);
-            patientDAO.save(concernedPatient);
+            professionalDAO.saveAndFlush(concernedPro);
+            patientDAO.saveAndFlush(concernedPatient);
 
             return new ResponseEntity<>(appointmentDTO, HttpStatus.CREATED);
         }catch(Exception ex){
             Logger.getGlobal().warning(ex.toString());
             return new ResponseEntity<>(appointmentDTO,HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<String> deleteAppointment(@PathVariable("id") long id){
+        try{
+            if(appointmentDAO.getById(id) != null){
+                appointmentDAO.deleteById(id);
+                return new ResponseEntity<>("Patiend deleted", HttpStatus.ACCEPTED);
+            }else{
+                return new ResponseEntity<>("Professional does not exist", HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            Logger.getGlobal().warning(e.toString());
+            return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
 }
