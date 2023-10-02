@@ -4,6 +4,11 @@ import fr.istic.tp3spring.domain.Patient;
 import fr.istic.tp3spring.dao.PatientDAO;
 import fr.istic.tp3spring.dto.PatientDTO;
 import fr.istic.tp3spring.dto.mapper.MapStructMapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +27,21 @@ public class PatientController {
         this.patientDAO = patientService;
     }
 
-    @RequestMapping("get-by-id/{id}")
+    /**
+     * get a Patient by ID
+     * @param id
+     * @return
+     */
+    @Operation(summary = "Get a Patient By ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found the book",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = PatientDTO.class)) }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Patient not found",
+                    content = @Content) })
+    @GetMapping("get-by-id/{id}")
     @ResponseBody
     public PatientDTO getById(@PathVariable("id")Long id){
         PatientDTO pDTO = null;
@@ -36,6 +55,11 @@ public class PatientController {
     }
 
 
+    /**
+     * get a Patient by mail
+     * @param mail
+     * @return
+     */
     @RequestMapping("get-by-email/{email}")
     @ResponseBody
     public PatientDTO getByEmail(@PathVariable("email") String mail) {
@@ -50,6 +74,10 @@ public class PatientController {
         return pDTO;
     }
 
+    /**
+     * get all patient
+     * @return
+     */
     @RequestMapping("get-all-patient")
     @ResponseBody
     public List<PatientDTO> getAllPatient(){
@@ -87,6 +115,11 @@ public class PatientController {
         }
     }
 
+    /**
+     * Delete a patient by ID
+     * @param id
+     * @return
+     */
     @DeleteMapping("/delete/{id}")
     public String deletePatientById(@PathVariable("id") long id){
         try{
@@ -101,6 +134,31 @@ public class PatientController {
             Logger.getGlobal().warning(e.toString());
             return "Error with patient deletion";
         }
+    }
+
+    /**
+     * Update a Patinet by his Id
+     * @param id
+     * @param patientDTO
+     * @return
+     */
+    @RequestMapping("update/{id}")
+    public ResponseEntity<String> updatePatient(@PathVariable("id")long id,@RequestBody PatientDTO patientDTO){
+        try{
+            if(patientDTO == null){
+                return new ResponseEntity<>("Patient deleted",HttpStatus.NO_CONTENT);
+            }
+
+            Patient patientToUpdate = MapStructMapper.INSTANCE.patientDTOToPatient(patientDTO);
+            patientToUpdate.setId(id);
+            patientDAO.save(patientToUpdate);
+
+            return new ResponseEntity<>("Patient deleted",HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Patient deleted",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
     }
+
+
 }

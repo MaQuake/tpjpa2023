@@ -2,7 +2,9 @@ package fr.istic.tp3spring.rest;
 
 
 import fr.istic.tp3spring.dao.ProfessionalDAO;
+import fr.istic.tp3spring.domain.Patient;
 import fr.istic.tp3spring.domain.Professional;
+import fr.istic.tp3spring.dto.PatientDTO;
 import fr.istic.tp3spring.dto.ProfessionalDTO;
 import fr.istic.tp3spring.dto.mapper.MapStructMapper;
 import org.springframework.http.HttpStatus;
@@ -24,6 +26,11 @@ public class ProfessionalController {
         this.proDAO = proDAO;
     }
 
+    /**
+     * get a professionnal by Id
+     * @param id
+     * @return
+     */
     @RequestMapping("get-by-id/{id}")
     @ResponseBody
     public ResponseEntity<ProfessionalDTO> getById(@PathVariable("id")Long id){
@@ -39,6 +46,11 @@ public class ProfessionalController {
     }
 
 
+    /**
+     * get a professionnal by email
+     * @param mail
+     * @return
+     */
     @RequestMapping("get-by-email/{email}")
     @ResponseBody
     public ResponseEntity<ProfessionalDTO> getByEmail(@PathVariable("email") String mail) {
@@ -54,6 +66,10 @@ public class ProfessionalController {
         return new ResponseEntity<>(pDTO,HttpStatus.FOUND);
     }
 
+    /**
+     * get all the professional
+     * @return
+     */
     @RequestMapping("get-all-professional")
     @ResponseBody
     public ResponseEntity<List<ProfessionalDTO>> getAllProfessional(){
@@ -69,6 +85,11 @@ public class ProfessionalController {
         }
     }
 
+    /**
+     * Create a professional
+     * @param proDTO
+     * @return
+     */
     @PostMapping("create")
     public ResponseEntity<ProfessionalDTO> createProfessional(@RequestBody ProfessionalDTO proDTO){
         try{
@@ -82,6 +103,11 @@ public class ProfessionalController {
         return new ResponseEntity<>(proDTO,HttpStatus.CREATED);
     }
 
+    /**
+     * Delete a professional
+     * @param id
+     * @return
+     */
     @DeleteMapping("delete/{id}")
     public ResponseEntity<String> deleteProfessional(@PathVariable("id") long id){
         try{
@@ -94,6 +120,23 @@ public class ProfessionalController {
         }catch (Exception e){
             Logger.getGlobal().warning(e.toString());
             return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @RequestMapping("update/{id}")
+    public ResponseEntity<String> updateProfessional(@PathVariable("id")long id,@RequestBody ProfessionalDTO proDTO){
+        try{
+            if(proDTO == null){
+                return new ResponseEntity<>("Patient deleted",HttpStatus.NO_CONTENT);
+            }
+            Professional proToUpdate = MapStructMapper.INSTANCE.professionalDTOToProfessional(proDTO);
+            proToUpdate.setId(id);
+            proDAO.save(proToUpdate);
+
+            return new ResponseEntity<>("Professional deleted",HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Professional deleted",HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
