@@ -60,7 +60,7 @@ public class PatientController {
      * @param mail
      * @return
      */
-    @RequestMapping("get-by-email/{email}")
+    @GetMapping("get-by-email/{email}")
     @ResponseBody
     public PatientDTO getByEmail(@PathVariable("email") String mail) {
         PatientDTO pDTO = null;
@@ -78,7 +78,7 @@ public class PatientController {
      * get all patient
      * @return
      */
-    @RequestMapping("get-all-patient")
+    @GetMapping("get-all-patient")
     @ResponseBody
     public List<PatientDTO> getAllPatient(){
         List<PatientDTO> pDTO = new ArrayList<>();
@@ -142,7 +142,7 @@ public class PatientController {
      * @param patientDTO
      * @return
      */
-    @RequestMapping("update/{id}")
+    @PostMapping("update/{id}")
     public ResponseEntity<String> updatePatient(@PathVariable("id")long id,@RequestBody PatientDTO patientDTO){
         try{
             if(patientDTO == null){

@@ -55,13 +55,6 @@ public class AppointmentDTO {
         this.proId = proId;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     private Long id;
 }

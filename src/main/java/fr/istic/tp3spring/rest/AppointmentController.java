@@ -35,7 +35,7 @@ public class AppointmentController {
      * Get all the appointment in the database
      * @return
      */
-    @RequestMapping("get-all-appointment")
+    @GetMapping("get-all-appointment")
     @ResponseBody
     public List<AppointmentDTO> getAllAppointment(){
         List<AppointmentDTO> pDTO = new ArrayList<>();
@@ -55,7 +55,7 @@ public class AppointmentController {
      * @param id
      * @return
      */
-    @RequestMapping("get-all-pro-appointment/{id}")
+    @GetMapping("get-all-pro-appointment/{id}")
     @ResponseBody
     public List<AppointmentDTO> getAllProAppointment(@PathVariable("id") long id){
         List<AppointmentDTO> pDTO = new ArrayList<>();
@@ -75,7 +75,7 @@ public class AppointmentController {
      * @param id
      * @return
      */
-    @RequestMapping("get-all-patient-appointment/{id}")
+    @GetMapping("get-all-patient-appointment/{id}")
     @ResponseBody
     public List<AppointmentDTO> getAllPatientAppointment(@PathVariable("id") long id){
         List<AppointmentDTO> pDTO = new ArrayList<>();
@@ -96,6 +96,7 @@ public class AppointmentController {
      * @return
      */
     @PostMapping("create")
+    @ResponseBody
     public ResponseEntity<AppointmentDTO> createAppointment(@RequestBody AppointmentDTO appointmentDTO){
         try{
             Professional concernedPro = professionalDAO.getById(appointmentDTO.getProId());
@@ -124,7 +125,7 @@ public class AppointmentController {
         try{
             if(appointmentDAO.getById(id) != null){
                 appointmentDAO.deleteById(id);
-                return new ResponseEntity<>("Patiend deleted", HttpStatus.ACCEPTED);
+                return new ResponseEntity<>("Appointment deleted", HttpStatus.ACCEPTED);
             }else{
                 return new ResponseEntity<>("Professional does not exist", HttpStatus.NOT_FOUND);
             }

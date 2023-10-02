@@ -31,7 +31,7 @@ public class ProfessionalController {
      * @param id
      * @return
      */
-    @RequestMapping("get-by-id/{id}")
+    @GetMapping("get-by-id/{id}")
     @ResponseBody
     public ResponseEntity<ProfessionalDTO> getById(@PathVariable("id")Long id){
         ProfessionalDTO pDTO = null;
@@ -51,7 +51,7 @@ public class ProfessionalController {
      * @param mail
      * @return
      */
-    @RequestMapping("get-by-email/{email}")
+    @GetMapping("get-by-email/{email}")
     @ResponseBody
     public ResponseEntity<ProfessionalDTO> getByEmail(@PathVariable("email") String mail) {
         ProfessionalDTO pDTO = null;
@@ -70,7 +70,7 @@ public class ProfessionalController {
      * get all the professional
      * @return
      */
-    @RequestMapping("get-all-professional")
+    @GetMapping("get-all-professional")
     @ResponseBody
     public ResponseEntity<List<ProfessionalDTO>> getAllProfessional(){
         List<ProfessionalDTO> pDTO = new ArrayList<>();
@@ -124,7 +124,7 @@ public class ProfessionalController {
 
     }
 
-    @RequestMapping("update/{id}")
+    @PostMapping("update/{id}")
     public ResponseEntity<String> updateProfessional(@PathVariable("id")long id,@RequestBody ProfessionalDTO proDTO){
         try{
             if(proDTO == null){
