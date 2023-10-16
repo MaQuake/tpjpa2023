@@ -8,6 +8,11 @@ import fr.istic.tp3spring.domain.Patient;
 import fr.istic.tp3spring.domain.Professional;
 import fr.istic.tp3spring.dto.AppointmentDTO;
 import fr.istic.tp3spring.dto.mapper.MapStructMapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -35,6 +40,14 @@ public class AppointmentController {
      * Get all the appointment in the database
      * @return
      */
+    @Operation(summary = "Get all appointments")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Appointment found",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AppointmentDTO.class)) }),
+            @ApiResponse(responseCode = "500", description = "Internal error",
+                    content = @Content),
+    })
     @GetMapping("get-all-appointment")
     @ResponseBody
     public List<AppointmentDTO> getAllAppointment(){
@@ -55,6 +68,14 @@ public class AppointmentController {
      * @param id
      * @return
      */
+    @Operation(summary = "Get all appointments of a professional by his ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Appointments found",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AppointmentDTO.class)) }),
+            @ApiResponse(responseCode = "500", description = "Internal error",
+                    content = @Content),
+    })
     @GetMapping("get-all-pro-appointment/{id}")
     @ResponseBody
     public List<AppointmentDTO> getAllProAppointment(@PathVariable("id") long id){
@@ -75,6 +96,14 @@ public class AppointmentController {
      * @param id
      * @return
      */
+    @Operation(summary = "Get all appointments of a patient by his ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Appointments found",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AppointmentDTO.class)) }),
+            @ApiResponse(responseCode = "500", description = "Internal error",
+                    content = @Content),
+    })
     @GetMapping("get-all-patient-appointment/{id}")
     @ResponseBody
     public List<AppointmentDTO> getAllPatientAppointment(@PathVariable("id") long id){
@@ -95,6 +124,14 @@ public class AppointmentController {
      * @param appointmentDTO
      * @return
      */
+    @Operation(summary = "Get all appointments of a professional by his ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Appointments created",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AppointmentDTO.class)) }),
+            @ApiResponse(responseCode = "400", description = "Bad request",
+                    content = @Content),
+    })
     @PostMapping("create")
     @ResponseBody
     public ResponseEntity<AppointmentDTO> createAppointment(@RequestBody AppointmentDTO appointmentDTO){
@@ -120,7 +157,18 @@ public class AppointmentController {
         }
     }
 
+    @Operation(summary = "Delete an appointment")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Appointments deleted",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AppointmentDTO.class)) }),
+            @ApiResponse(responseCode = "404", description = "Appointment not found",
+                    content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal error",
+                    content = @Content),
+    })
     @DeleteMapping("delete/{id}")
+    @ResponseBody
     public ResponseEntity<String> deleteAppointment(@PathVariable("id") long id){
         try{
             if(appointmentDAO.getById(id) != null){

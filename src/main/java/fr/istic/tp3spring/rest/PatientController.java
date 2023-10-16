@@ -34,7 +34,7 @@ public class PatientController {
      */
     @Operation(summary = "Get a Patient By ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Found the book",
+            @ApiResponse(responseCode = "200", description = "Found the Patient",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = PatientDTO.class)) }),
             @ApiResponse(responseCode = "400", description = "Invalid id supplied",
@@ -60,6 +60,13 @@ public class PatientController {
      * @param mail
      * @return
      */
+    @Operation(summary = "Get a Patient By Email")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found the Patient",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = PatientDTO.class)) }),
+            @ApiResponse(responseCode = "404", description = "Patient not found",
+                    content = @Content) })
     @GetMapping("get-by-email/{email}")
     @ResponseBody
     public PatientDTO getByEmail(@PathVariable("email") String mail) {
@@ -78,6 +85,13 @@ public class PatientController {
      * get all patient
      * @return
      */
+    @Operation(summary = "Return all the patients")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Patients founded",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = PatientDTO.class)) }),
+            @ApiResponse(responseCode = "404", description = "Patient not found",
+                    content = @Content) })
     @GetMapping("get-all-patient")
     @ResponseBody
     public List<PatientDTO> getAllPatient(){
@@ -98,6 +112,16 @@ public class PatientController {
      * @param patientDTO
      * @return
      */
+    @Operation(summary = "Create a Patient")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Patient created",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = PatientDTO.class)) }),
+            @ApiResponse(responseCode = "200", description = "Patient Found",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = PatientDTO.class)) }),
+            @ApiResponse(responseCode = "500", description = "Operation Error",
+                    content = @Content) })
     @PostMapping("create")
     public ResponseEntity<PatientDTO> createPatient(@RequestBody PatientDTO patientDTO){
         try {
@@ -120,6 +144,14 @@ public class PatientController {
      * @param id
      * @return
      */
+    @Operation(summary = "Delete a patient")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Patient deleted",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = PatientDTO.class)) }),
+            @ApiResponse(responseCode = "404", description = "Patient not Found",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = PatientDTO.class)) })})
     @DeleteMapping("/delete/{id}")
     public String deletePatientById(@PathVariable("id") long id){
         try{
@@ -137,11 +169,18 @@ public class PatientController {
     }
 
     /**
-     * Update a Patinet by his Id
+     * Update a Patient by his Id
      * @param id
      * @param patientDTO
      * @return
      */
+    @Operation(summary = "Update a patient by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Patient updated",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = PatientDTO.class)) }),
+            @ApiResponse(responseCode = "500", description = "Operation Error",
+                    content = @Content) })
     @PostMapping("update/{id}")
     public ResponseEntity<String> updatePatient(@PathVariable("id")long id,@RequestBody PatientDTO patientDTO){
         try{
