@@ -4,7 +4,8 @@
 
 Pour lancer le projet il faut :
 - Lancer le serveur hsql
-- Lancer le JpaTest.java pour peupler la bdd
+- Lancer le JpaTest.java pour peupler la bdd (dans le cas du tp JPA)
+- Lancer le test.script dans le répertoire data (dans le cas de spring)
 - Lancer le serveur REST
 
 Les credentials du serveur sont ceux de base du TP JPA :
@@ -66,6 +67,9 @@ Vous trouverez ci-dessous un digramme de classe pour décrire le modèle métier
 
 ## Partie JPA/Jaxrs
 
+Cette partie n'est pas complète mon alternance comportant une partie de spring/keycloack j'ai
+préféré m'intéresser à la partie spring du TP.
+
 ### API
 
 On peut upload, get des utilisateurs (patients ou professionnels) ainsi que des rendez-vous
@@ -111,9 +115,9 @@ exécuté sur notre API.
 
 Il y a un endpoint openAPI disponible avec un swagger :
 
-OpenAPI : http://localhost:8080/v3/api-docs
+OpenAPI : http://localhost:8082/v3/api-docs
 
-Swagger : http://localhost:8080/swagger-ui/index.html#/
+Swagger : http://localhost:8082/swagger-ui/index.html#/
 
 ### Authentification
 
